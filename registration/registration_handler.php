@@ -1,13 +1,28 @@
-<?php
+<?php 
 
-    include  '../templates/common/header.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$connection_obj = mysqli_connect("localhost", "root", "aris0007", "test");
+
+if(!$connection_obj) {
+    die('Could not connect to MySQL: ' . mysqli_connect_error());
+} else {
+    //echo 'Connected successfully';
+}
+
 ?>
+<?php 
+    session_start();
+ ?>
 <?php  
 if (isset($_POST['register'])) {
     
     $name = mysqli_real_escape_string($connection_obj,$_POST['name']);
     $email = mysqli_real_escape_string ($connection_obj,$_POST['email']);
     $phone = mysqli_real_escape_string($connection_obj,$_POST['phone']);
+    $course= mysqli_real_escape_string($connection_obj,$_POST['course']);
     $password = mysqli_real_escape_string($connection_obj,$_POST['password']);
 
 
@@ -20,7 +35,7 @@ if(mysqli_num_rows($result) > 0) {
     header("Location: signup.php");
     exit(0); 
 }
-    $query = "INSERT INTO user (name, email, phone, password) VALUES ('$name', '$email', '$phone', '$password')";
+    $query = "INSERT INTO user (name, email, phone,course, password) VALUES ('$name', '$email', '$phone', '$password', '$course')";
     if ($connection_obj->query($query) === TRUE) {
       $_SESSION['message'] = "Registration successfull";
         header("Location: login.php");
@@ -35,6 +50,7 @@ if(mysqli_num_rows($result) > 0) {
 
 if (isset($_POST['login'])) 
 {
+
     
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -46,16 +62,19 @@ if (isset($_POST['login']))
     if ($result->num_rows == 1) 
     {
     		$_SESSION['message'] = "Welcome" .$username;
-        header("Location: index.php");
+        header("Location: user.php");
         exit(0);
     	}
     else 
     {
-        echo "Invalid email or password!";
+       	$_SESSION['message'] = "Invalid username or password!";
+        header("Location: login.php");
+        exit(0); 
     }
+}
 
     
-}
+
 ?>
 
 

@@ -1,18 +1,10 @@
-<?php 
+<?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+    include  'templates/common/header.php';
+    render_header('Student CRUD project')
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>users</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-</head>
-<body>
-
-   <div class="container mt-4">
+  
+    <div class="container mt-4">
 
         <?php include('message.php'); ?>
 
@@ -29,7 +21,7 @@ error_reporting(E_ALL);
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>User Name</th>
+                                    <th>Student Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Course</th>
@@ -71,6 +63,8 @@ error_reporting(E_ALL);
             </div>
         </div>
     </div>
-   <script src="assets/js/bootstrap.min.js"></script>
-</body>
-</html>
+<?php
+
+    include  'templates/common/footer.php';
+?>
+  

@@ -14,8 +14,8 @@
         <h2>Login</h2>
         <form action="registration_handler.php" method="POST">
           <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" required>
+            <label for="email" class="form-label">Username</label>
+            <input type="text" name="email" class="form-control" required>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
