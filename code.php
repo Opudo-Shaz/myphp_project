@@ -27,7 +27,7 @@ if(isset($_POST['delete_user']))
 
 if(isset($_POST['update_user']))
 {
-    $student_id = mysqli_real_escape_string($connection_obj, $_POST['user_id']);
+    $user_id = mysqli_real_escape_string($connection_obj, $_POST['user_id']);
 
     $name = mysqli_real_escape_string($connection_obj, $_POST['name']);
     $email = mysqli_real_escape_string($connection_obj, $_POST['email']);
@@ -93,6 +93,7 @@ if(mysqli_num_rows($result) > 0) {
         header("Location: student_create.php");
         exit(0);
     }
+    
 }
 
 ?>

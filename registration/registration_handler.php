@@ -1,21 +1,7 @@
-<?php 
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-$connection_obj = mysqli_connect("localhost", "root", "aris0007", "test");
-
-if(!$connection_obj) {
-    die('Could not connect to MySQL: ' . mysqli_connect_error());
-} else {
-    //echo 'Connected successfully';
-}
-
-?>
-<?php 
+<?php
     session_start();
- ?>
+    include '../dbcon.php';
+?>
 <?php  
 if (isset($_POST['register'])) {
     
@@ -61,8 +47,8 @@ if (isset($_POST['login']))
 
     if ($result->num_rows == 1) 
     {
-    		$_SESSION['message'] = "Welcome" .$username;
-        header("Location: user.php");
+    	$_SESSION['message'] = "Welcome";
+        header("Location: ../index.php");
         exit(0);
     	}
     else 

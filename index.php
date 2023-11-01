@@ -13,7 +13,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>User Details
-                            <a href="student_create.php" class="btn btn-primary float-end">Add User</a>
+                        <?php  
+                        if ($_SESSION['user_role'] === 'admin'): ?>
+                                   <a href="student_create.php" class="btn btn-primary float-end">Add User</a>
+                                   <?php endif; ?>
+                            
                         </h4>
                     </div>
                     <div class="card-body">
@@ -26,7 +30,11 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Course</th>
-                                    <th>Action</th>
+
+                                     <?php 
+                                     if ($_SESSION['user_role'] === 'admin'): ?>
+                                   <th>Action</th>
+                                   <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,14 +55,16 @@
                                                 <td><?= $user['email']; ?></td>
                                                 <td><?= $user['phone']; ?></td>
                                                 <td><?= $user['course']; ?></td>
-                                                <td>
-                                                    <a href="student_view.php?id=<?= $user['id']; ?>" class="btn btn-info btn-sm">View</a>
+
+                                                 <?php 
+                                     if ($_SESSION['user_role'] === 'admin'): ?>
+                                   <td><a href="student_view.php?id=<?= $user['id']; ?>" class="btn btn-info btn-sm">View</a>
                                                     <a href="student_edit.php?id=<?= $user['id']; ?>" class="btn btn-success btn-sm">Edit</a>
 
                                                     <form action="code.php" method="POST" class="d-inline">
                                                         <button type="submit" name="delete_user" value="<?=$user['id'];?>" class="btn btn-danger btn-sm">Delete</button>
-                                                    </form>
-                                                </td>
+                                                    </form></td>
+                                   <?php endif; ?>
                                             </tr>
                                             <?php
                                         }
