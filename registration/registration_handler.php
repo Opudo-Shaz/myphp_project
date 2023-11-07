@@ -22,8 +22,9 @@ if(mysqli_num_rows($result) > 0) {
     exit(0); 
 }
     $query = "INSERT INTO user (name, email, phone,course, password) VALUES ('$name', '$email', '$phone', '$password', '$course')";
-    if ($connection_obj->query($query) === TRUE) {
-      $_SESSION['message'] = "Registration successfull";
+    if ($connection_obj->query($query) === TRUE) 
+    {
+      $_SESSION['message'] = "Registration successfull!";
         header("Location: login.php");
         exit(0);
     } 
@@ -40,14 +41,21 @@ if (isset($_POST['login']))
     
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $user_role= $_POST['user_role'];
 
 
-    $query = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
+    $query = "SELECT * FROM user WHERE email = '$email'AND password = '$password'";
     $result = $connection_obj->query($query);
+    if (isset($array['user_role'])) {
+    $user_role = $array['user_role'];
+     } 
+else {
+   echo "User role not specified!";
+}
 
     if ($result->num_rows == 1) 
     {
-    	$_SESSION['message'] = "Welcome";
+    	$_SESSION['message'] = "Welcome" . $user_role;
         header("Location: ../index.php");
         exit(0);
     	}
