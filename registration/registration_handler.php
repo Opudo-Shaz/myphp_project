@@ -38,6 +38,23 @@ if(mysqli_num_rows($result) > 0) {
 if (isset($_POST['login'])) 
 {
 
+// Set a session variable
+$_SESSION['user_role'] = '$user_role';
+
+// Access and display the session variable
+if (isset($_SESSION['user_role'])) {
+    $user_role = $_SESSION['admin'];
+    
+    $_SESSION['message'] = "Welcome!";
+        header("Location: ../index.php");
+       
+}
+else{
+	$_SESSION['message'] = "User Role not specified!";
+        header("Location: ../index.php");
+        exit(0);
+}
+
     
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -46,16 +63,10 @@ if (isset($_POST['login']))
 
     $query = "SELECT * FROM user WHERE email = '$email'AND password = '$password'";
     $result = $connection_obj->query($query);
-    if (isset($array['user_role'])) {
-    $user_role = $array['user_role'];
-     } 
-else {
-   echo "User role not specified!";
-}
 
     if ($result->num_rows == 1) 
     {
-    	$_SESSION['message'] = "Welcome" . $user_role;
+    	$_SESSION['message'] = "Welcome!";
         header("Location: ../index.php");
         exit(0);
     	}
