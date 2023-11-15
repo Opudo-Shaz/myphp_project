@@ -1,28 +1,38 @@
 <?php
     session_start();
     include 'dbcon.php';
-?>
-<?php  
+
 
 if(isset($_POST['delete_user']))
 {
     $user_id = mysqli_real_escape_string($connection_obj, $_POST['delete_user']);
+    $response = [];
 
-    $query = "DELETE FROM user WHERE id='$user_id' ";
-    $query_run = mysqli_query($connection_obj, $query);
+    $query = "SELECT * FROM user WHERE id = '$user_id'";
+    $result = mysqli_query($connection_obj, $query);
 
-    if($query_run)
-    {
-        $_SESSION['message'] = "User Deleted Successfully";
-        header("Location: index.php");
-        exit(0);
+
+    if(mysqli_num_rows($result) > 0) {
+        $query = "DELETE FROM user WHERE id='$user_id' ";
+        $query_run = mysqli_query($connection_obj, $query);
+
+        if($query_run)
+        {
+            $response['status'] = 'OK';
+            $response['desc'] = 'User deleted Successfully';
+            // $_SESSION['message'] = "User Deleted Successfully";
+            // header("Location: index.php");
+            // exit(0);
+        }
     }
+    
     else
     {
-        $_SESSION['message'] = "User Not Deleted";
-        header("Location: index.php");
-        exit(0);
+        $response['status'] = 'ERR';
+        $response['desc'] = 'User not found';
+        
     }
+    echo json_encode($response);
 }
 
 if(isset($_POST['update_user']))
@@ -68,15 +78,15 @@ if(isset($_POST['save_user']))
     
     
 
-$query = "SELECT * FROM user WHERE email = '$email' OR phone = '$phone'";
-$result = mysqli_query($connection_obj, $query);
+    $query = "SELECT * FROM user WHERE email = '$email' OR phone = '$phone'";
+    $result = mysqli_query($connection_obj, $query);
 
 
-if(mysqli_num_rows($result) > 0) {
-    $_SESSION['message'] = "Email or phone number is already registered. Please choose different credentials.";
-    header("Location: student_create.php");
-    exit(0); 
-}
+    if(mysqli_num_rows($result) > 0) {
+        $_SESSION['message'] = "Email or phone number is already registered. Please choose different credentials.";
+        header("Location: student_create.php");
+        exit(0); 
+    }
 
     $query = "INSERT INTO user (name,email,phone,course,password,user_role) VALUES ('$name','$email','$phone','$course','$password','user_role')";
 

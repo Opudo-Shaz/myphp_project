@@ -1,6 +1,7 @@
 <?php
 
     include  'templates/common/header.php';
+     include  'templates/common/navbar.php';
     render_header('Student CRUD :: Student edit')
 ?>
   

@@ -1,14 +1,12 @@
+<?php
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Login Form</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-</head>
-<body>
+    include  '../templates/common/header.php';
+    render_header('Student CRUD :: Login')
+?>
+
 
   <div class="container">
-    
+    <?php include('../message.php'); ?>
     <div class="row">
       <div class="col-md-4 offset-md-4 mt-5">
         <h2>Login</h2>
@@ -27,6 +25,8 @@
       </div>
     </div>
   </div>
-   <script src="assets/js/bootstrap.min.js"></script>
-</body>
-</html>
+       
+ <?php
+
+    include  '../templates/common/footer.php';
+?>

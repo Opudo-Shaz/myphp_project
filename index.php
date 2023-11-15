@@ -1,7 +1,11 @@
 <?php
-
+    
     include  'templates/common/header.php';
-    render_header('Student CRUD project')
+    include  'templates/common/navbar.php';
+    render_header('Student CRUD project');
+    //var_dump($_SESSION);
+
+    
 ?>
   
     <div class="container mt-4">
@@ -14,7 +18,7 @@
                     <div class="card-header">
                         <h4>User Details
                         <?php  
-                        if ($_SESSION['user_role'] === 'admin'): ?>
+                        if (isset($_SESSION['user_role']) && $_SESSION['user_role']=== 'admin'): ?>
                                    <a href="student_create.php" class="btn btn-primary float-end">Add User</a>
                                    <?php endif; ?>
                             
@@ -32,7 +36,7 @@
                                     <th>Course</th>
 
                                      <?php 
-                                     if ($_SESSION['user_role'] === 'admin'): ?>
+                                     if (isset($_SESSION['user_role']) && $_SESSION['user_role']=== 'admin'): ?>
                                    <th>Action</th>
                                    <?php endif; ?>
                                 </tr>
@@ -47,7 +51,6 @@
                                         foreach($query_run as $user)
                                         {
                                             ?>
-
                                
                                             <tr>
                                                 <td><?= $user['id']; ?></td>
@@ -56,15 +59,16 @@
                                                 <td><?= $user['phone']; ?></td>
                                                 <td><?= $user['course']; ?></td>
 
-                                                 <?php 
-                                     if ($_SESSION['user_role'] === 'admin'): ?>
-                                   <td><a href="student_view.php?id=<?= $user['id']; ?>" class="btn btn-info btn-sm">View</a>
-                                                    <a href="student_edit.php?id=<?= $user['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                                <?php 
+                                                    if (isset($_SESSION['user_role']) && $_SESSION['user_role']=== 'admin'): ?>
+                                                        <td>
+                                                            <a href="student_view.php?id=<?= $user['id']; ?>" class="btn btn-info btn-sm">View</a>
+                                                            <a href="student_edit.php?id=<?= $user['id']; ?>" class="btn btn-success btn-sm">Edit</a>
 
-                                                    <form action="code.php" method="POST" class="d-inline">
-                                                        <button type="submit" name="delete_user" value="<?=$user['id'];?>" class="btn btn-danger btn-sm">Delete</button>
-                                                    </form></td>
-                                   <?php endif; ?>
+                                                    
+                                                            <a href="#" name="delete_user" onclick="del(<?=$user['id'];?>)" class="btn btn-danger btn-sm">Delete</a>
+                                                        </td>
+                                                <?php endif; ?>
                                             </tr>
                                             <?php
                                         }
@@ -87,5 +91,6 @@
 
     include  'templates/common/footer.php';
 ?>
+
   
 

@@ -1,20 +1,15 @@
 <?php
-    session_start();
-    include '../dbcon.php';
+
+    include  '../templates/common/header.php';
+    render_header('Student CRUD :: Register')
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Registration Form</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-</head>
-<body>
+
 
     <div class="container">
       <h2>Registration Form</h2>
         <form method="POST" action="registration_handler.php">
-            <div class="mb-3">
             <?php include('../message.php'); ?>
+            <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" required>
             </div>
@@ -40,6 +35,8 @@
             <p>Already have an account?<a href="login.php">Login</a></p>
         </form>
     </div>
- <script src="assets/js/bootstrap.min.js"></script>
-</body>
-</html>
+        
+ <?php
+
+    include  '../templates/common/footer.php';
+?>
